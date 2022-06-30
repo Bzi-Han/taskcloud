@@ -33,6 +33,7 @@
 **前端**
 
 `taskcloud_web\src\config\network.js`第132行设置全局后端接口地址
+
 `taskcloud_web\src\config\crypto.js`设置加解密密钥
 
 **后端**
@@ -99,3 +100,12 @@
 
 ### 预览图
 
+![预览图01](https://github.com/Bzi-Han/taskcloud/blob/main/images/1.jpg)
+![预览图02](https://github.com/Bzi-Han/taskcloud/blob/main/images/2.jpg)
+![预览图03](https://github.com/Bzi-Han/taskcloud/blob/main/images/3.jpg)
+![预览图04](https://github.com/Bzi-Han/taskcloud/blob/main/images/4.jpg)
+![预览图05](https://github.com/Bzi-Han/taskcloud/blob/main/images/5.jpg)
+![预览图06](https://github.com/Bzi-Han/taskcloud/blob/main/images/6.jpg)
+![预览图07](https://github.com/Bzi-Han/taskcloud/blob/main/images/7.jpg)
+![预览图08](https://github.com/Bzi-Han/taskcloud/blob/main/images/8.jpg)
+![预览图09](https://github.com/Bzi-Han/taskcloud/blob/main/images/9.jpg)

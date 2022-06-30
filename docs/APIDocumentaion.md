@@ -11,7 +11,7 @@
 
 ---
 
-# crypto {#crypto}
+# crypto
 
 加解密工具集。
 
@@ -32,7 +32,7 @@
 
 ---
 
-### base64Encode {#base64Encode}
+### base64Encode
 
 base64编码。
 
@@ -49,7 +49,7 @@ base64编码。
 
 ---
 
-### base64Decode {#base64Decode}
+### base64Decode
 
 base64解码。
 
@@ -66,7 +66,7 @@ base64解码。
 
 ---
 
-### md5 {#md5}
+### md5
 
 md5信息摘要。
 
@@ -83,7 +83,7 @@ md5信息摘要。
 
 ---
 
-### sha1 {#sha1}
+### sha1
 
 sha1信息摘要。
 
@@ -100,7 +100,7 @@ sha1信息摘要。
 
 ---
 
-### sha256 {#sha256}
+### sha256
 
 sha256信息摘要。
 
@@ -117,7 +117,7 @@ sha256信息摘要。
 
 ---
 
-### sha512 {#sha512}
+### sha512
 
 sha512信息摘要。
 
@@ -134,7 +134,7 @@ sha512信息摘要。
 
 ---
 
-### aesEncrypt {#aesEncrypt}
+### aesEncrypt
 
 aes加密。
 
@@ -181,7 +181,7 @@ base64编码的加密后的数据。
 
 ---
 
-### aesDecrypt {#aesDecrypt}
+### aesDecrypt
 
 aes解密。
 
@@ -230,7 +230,7 @@ aes解密。
 
 ---
 
-### desEncrypt {#desEncrypt}
+### desEncrypt
 
 des加密。
 
@@ -277,7 +277,7 @@ base64编码的加密后的数据。
 
 ---
 
-### desDecrypt {#desDecrypt}
+### desDecrypt
 
 des解密。
 
@@ -326,7 +326,7 @@ des解密。
 
 ---
 
-# json {#json}
+# json
 
 json数据加载器。
 
@@ -338,7 +338,7 @@ json数据加载器。
 
 ---
 
-### loads {#loads}
+### loads
 
 加载json文本数据为对象。
 
@@ -358,7 +358,7 @@ json数据加载器。
 
 ---
 
-# requests {#requests}
+# requests
 
 HTTP请求模块。
 
@@ -371,7 +371,7 @@ HTTP请求模块。
 
 ---
 
-### get {#get}
+### get
 
 HTTP GET请求。
 
@@ -412,7 +412,7 @@ HTTP GET请求。
 
 ---
 
-### post {#post}
+### post
 
 HTTP POST请求。
 
@@ -458,7 +458,7 @@ HTTP POST请求。
 
 ---
 
-# tools {#tools}
+# tools
 
 工具模块。
 
@@ -473,7 +473,7 @@ HTTP POST请求。
 
 ---
 
-### operation {#operation}
+### operation
 
 输出操作类型的日志。
 
@@ -491,7 +491,7 @@ HTTP POST请求。
 
 ---
 
-### info {#info}
+### info
 
 输出信息类型的日志。
 
@@ -509,7 +509,7 @@ HTTP POST请求。
 
 ---
 
-### failed {#failed}
+### failed
 
 输出失败类型的日志。
 
@@ -527,7 +527,7 @@ HTTP POST请求。
 
 ---
 
-### succeed {#succeed}
+### succeed
 
 输出成功类型的日志。
 
