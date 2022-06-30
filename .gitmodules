@@ -1,0 +1,9 @@
+[submodule "taskcloud_core"]
+	path = taskcloud_core
+	url = https://github.com/Bzi-Han/taskcloud_core.git
+[submodule "taskcloud_backend"]
+	path = taskcloud_backend
+	url = https://github.com/Bzi-Han/taskcloud_backend.git
+[submodule "taskcloud_web"]
+	path = taskcloud_web
+	url = https://github.com/Bzi-Han/taskcloud_web.git
