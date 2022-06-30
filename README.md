@@ -100,12 +100,12 @@
 
 ### 预览图
 
-![预览图01](https://github.com/Bzi-Han/taskcloud/blob/main/images/1.jpg)
-![预览图02](https://github.com/Bzi-Han/taskcloud/blob/main/images/2.jpg)
-![预览图03](https://github.com/Bzi-Han/taskcloud/blob/main/images/3.jpg)
-![预览图04](https://github.com/Bzi-Han/taskcloud/blob/main/images/4.jpg)
-![预览图05](https://github.com/Bzi-Han/taskcloud/blob/main/images/5.jpg)
-![预览图06](https://github.com/Bzi-Han/taskcloud/blob/main/images/6.jpg)
-![预览图07](https://github.com/Bzi-Han/taskcloud/blob/main/images/7.jpg)
-![预览图08](https://github.com/Bzi-Han/taskcloud/blob/main/images/8.jpg)
-![预览图09](https://github.com/Bzi-Han/taskcloud/blob/main/images/9.jpg)
+![预览图01](https://github.com/Bzi-Han/taskcloud/blob/main/images/1.jpeg)
+![预览图02](https://github.com/Bzi-Han/taskcloud/blob/main/images/2.jpeg)
+![预览图03](https://github.com/Bzi-Han/taskcloud/blob/main/images/3.jpeg)
+![预览图04](https://github.com/Bzi-Han/taskcloud/blob/main/images/4.jpeg)
+![预览图05](https://github.com/Bzi-Han/taskcloud/blob/main/images/5.jpeg)
+![预览图06](https://github.com/Bzi-Han/taskcloud/blob/main/images/6.jpeg)
+![预览图07](https://github.com/Bzi-Han/taskcloud/blob/main/images/7.jpeg)
+![预览图08](https://github.com/Bzi-Han/taskcloud/blob/main/images/8.jpeg)
+![预览图09](https://github.com/Bzi-Han/taskcloud/blob/main/images/9.jpeg)
