@@ -56,7 +56,7 @@
 **后端**
 
 0. 确保在子项目根目录打开命令行终端
-1. 执行`./mvnw clean package -D maven.test.skip`
+1. 执行`./mvnw clean package -D maven.test.skip=true -D file.encoding=UTF-8`
 
 编译后的文件会在子项目根目录的`target`文件夹中
 
@@ -65,8 +65,8 @@
 0. 确保在子项目根目录打开命令行终端
 1. 执行`git submodule init`
 2. 执行`git submodule update`
-3. 执行`cmake -S . -B build -A x64`，其中`x64`应替换为自己的平台的类型
-4. 执行`cmake --build build --config Release --target ALL_BUILD -j 38`，其中`-j 38`的38为同时编译线程数，应替换为编译平台的CPU的超线程数+2
+3. 执行`cmake -S . -B build`
+4. 执行`cmake --build build --config Release -j 38`，其中`-j 38`的38为同时编译线程数，应替换为编译平台的CPU的超线程数+2
 
 编译后的文件会在子项目根目录的`build/Release`文件夹中
 
