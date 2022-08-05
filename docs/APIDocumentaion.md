@@ -8,6 +8,7 @@
 | [json](#json) | json操作模块 |
 | [requests](#requests) | http请求模块 |
 | [tools](#tools) | 工具模块 |
+| [system](#system) | 系统模块 |
 
 ---
 
@@ -19,6 +20,10 @@
 
 | Name | Description |
 | - | - |
+| [crypto.gbkToUTF8](#gbkToUTF8) | gbk转utf-8 |
+| [crypto.utf8ToGBK](#utf8ToGBK) | utf-8转gbk |
+| [crypto.urlEncode](#urlEncode) | url编码 |
+| [crypto.urlDecode](#urlDecode) | url解码 |
 | [crypto.base64Encode](#base64Encode) | base64编码 |
 | [crypto.base64Decode](#base64Decode) | base64解码 |
 | [crypto.md5](#md5) | md5信息摘要 |
@@ -29,6 +34,77 @@
 | [crypto.aesDecrypt](#aesDecrypt) | aes解密 |
 | [crypto.desEncrypt](#desEncrypt) | des加密 |
 | [crypto.desDecrypt](#desDecrypt) | des解密 |
+| [crypto.rsaGenerateKeyPair](#rsaGenerateKeyPair) | rsa密钥对生成 |
+| [crypto.rsaEncrypt](#rsaEncrypt) | rsa加密 |
+| [crypto.rsaDecrypt](#rsaDecrypt) | rsa解密 |
+
+---
+
+### gbkToUTF8
+
+gbk转utf-8。
+
+`string gbkToUTF8(string data)`
+
+#### 参数
+
+*data*
+需要转码的数据
+
+#### 返回值
+
+转码后的数据。
+
+---
+
+### utf8ToGBK
+
+utf-8转gbk。
+
+`string utf8ToGBK(string data)`
+
+#### 参数
+
+*data*
+需要转码的数据
+
+#### 返回值
+
+转码后的数据。
+
+---
+
+### urlEncode
+
+url编码。
+
+`string urlEncode(string data)`
+
+#### 参数
+
+*data*
+需要编码的数据
+
+#### 返回值
+
+编码后的数据。
+
+---
+
+### urlDecode
+
+url解码。
+
+`string urlDecode(string data)`
+
+#### 参数
+
+*data*
+需要解码的数据
+
+#### 返回值
+
+解码后的数据。
 
 ---
 
@@ -326,6 +402,106 @@ des解密。
 
 ---
 
+### rsaGenerateKeyPair
+
+rsa密钥对生成。
+
+`object rsaGenerateKeyPair([int keySize] [, bool hex] [, string seed])`
+
+#### 参数
+
+*keySize*
+密钥大小
+
+*hex*
+是否以十六进制方式编码
+
+*seed*
+用户提供的随机池种子
+
+#### 返回值
+
+根据使用的语言不同返回不同的对象：
++ `Lua` 返回一个`table`
++ `Python` 返回一个`dict`
++ `Javascript` 返回一个`object`
+
+返回的对象拥有两个成员：
++ `publicKey` 公钥
++ `privateKey` 私钥
+
+#### 注意
+
+此函数的三个参数均为可选参数。
+
+*keySize* 的值默认为`1024`。
+
+*hex* 的值默认为`true`。
+
+*seed* 的默认值为`空`。
+
+---
+
+### rsaEncrypt
+
+rsa加密
+
+`string rsaEncrypt(string publicKey, string data, bool oaep)`
+
+#### 参数
+
+*publicKey*
+公钥
+
+*data*
+需要加密的数据
+
+*oaep*
+是否以`OAEP(Optimal Asymmetric Encryption Padding)`的方式填充，否则以`PKCS`的方式填充
+
+#### 返回值
+
+加密后的数据。
+
+#### 注意
+
+*publicKey* 的值可以是`hex`编码的，`base64`编码的以及带`-----BEGIN xxx KEY-----`的。
+
+*oaep* 推荐为`true`。
+
+---
+
+### rsaDecrypt
+
+rsa解密
+
+`string rsaDecrypt(string privateKey, string data, bool oaep)`
+
+#### 参数
+
+*privateKey*
+私钥
+
+*data*
+需要解密的数据
+
+*oaep*
+是否以`OAEP(Optimal Asymmetric Encryption Padding)`的方式填充，否则以`PKCS`的方式填充
+
+#### 返回值
+
+解密后的数据。
+
+#### 注意
+
+*privateKey* 的值可以是`hex`编码的，`base64`编码的以及带`-----BEGIN xxx KEY-----`的。
+
+*data* 的编码需要与*privateKey*的编码一致。
+
+*oaep* 的值需要与加密的填充方式一致。
+
+---
+
 # json
 
 json数据加载器。
@@ -368,6 +544,8 @@ HTTP请求模块。
 | - | - |
 | [requests.get](#get) | HTTP GET |
 | [requests.post](#post) | HTTP POST |
+| [requests.put](#put) | HTTP PUT |
+| [requests.delete](#delete) | HTTP DELETE |
 
 ---
 
@@ -458,6 +636,93 @@ HTTP POST请求。
 
 ---
 
+### put
+
+HTTP PUT请求。
+
+`object put(string url, string|object data [, object headers] [, string proxy] [, bool redirect] [, int timeout])`
+
+#### 参数
+
+*url*
+访问的目标地址
+
+*data*
+提交的数据，可以是字符串或对象
+
+*headers*
+附加头 `无`
+
+*proxy*
+想要使用的代理的URL `无`
+
+*redirect*
+是否重定向 `true`
+
+*timeout*
+超时时间(ms) `100000`
+
+#### 返回值
+
+根据使用的语言不同返回不同的对象：
++ `Lua` 返回一个`table`
++ `Python` 返回一个`dict`
++ `Javascript` 返回一个`object`
+
+对象中包含以下属性：
++ `code` 请求结果状态码
++ `headers` 请求结果返回头
++ `content` 请求的结果
+
+#### 注意
+
+*data* 的值若是一个字符串则默认为表单数据，若为一个对象则默认为JSON数据，如需要调整可直接在`headers`中添加`Content-Type`属性。
+
+*headers* 的值必须是一个对象，根据使用的语言不同而不同。
+
+---
+
+### delete
+
+HTTP DELETE请求。
+
+`object delete(string url [, object headers] [, string proxy] [, bool redirect] [, int timeout])`
+
+#### 参数
+
+*url*
+访问的目标地址
+
+*headers*
+附加头 `无`
+
+*proxy*
+想要使用的代理的URL `无`
+
+*redirect*
+是否重定向 `true`
+
+*timeout*
+超时时间(ms) `100000`
+
+#### 返回值
+
+根据使用的语言不同返回不同的对象：
++ `Lua` 返回一个`table`
++ `Python` 返回一个`dict`
++ `Javascript` 返回一个`object`
+
+对象中包含以下属性：
++ `code` 请求结果状态码
++ `headers` 请求结果返回头
++ `content` 请求的结果
+
+#### 注意
+
+*headers* 的值必须是一个对象，根据使用的语言不同而不同。
+
+---
+
 # tools
 
 工具模块。
@@ -542,5 +807,30 @@ HTTP POST请求。
 对于服务程序`core`，此消息将会被发往此次与其通信的客户端。
 
 对于本地程序`local`，此消息将会在控制台直接输出。
+
+---
+
+# system
+
+系统模块。
+
+#### 方法
+
+| Name | Description |
+| - | - |
+| [system.delay](#delay) | 延迟 |
+
+---
+
+### delay
+
+延迟任意毫秒后继续执行。
+
+`void delay(int milliseconds)`
+
+#### 参数
+
+*milliseconds*
+需要延迟的毫秒数
 
 ---

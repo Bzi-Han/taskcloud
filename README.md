@@ -8,6 +8,8 @@
 
 若是任务的开发者还可以在帮助中心发布帮助文档，以更好地帮助用户使用。
 
+相关文章：[Taskcloud基本重构完成与后续填坑记录计划贴](https://bzi-han.github.io/2022/07/02/%E9%A1%B9%E7%9B%AE-Taskcloud%E5%9F%BA%E6%9C%AC%E9%87%8D%E6%9E%84%E5%AE%8C%E6%88%90%E4%B8%8E%E5%90%8E%E7%BB%AD%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95%E8%AE%A1%E5%88%92%E8%B4%B4/)
+
 ### 架构
 
 此项目分为三个子项目
@@ -74,7 +76,7 @@
 
 1. 根据[数据库结构](https://github.com/Bzi-Han/taskcloud/blob/main/datas/taskcloud.sql)在MySQL中建立数据库。
 2. 运行核心服务程序。
-3. 运行后端服务程序。
+3. 运行后端服务程序。如果你是以`java -jar`启动服务端则需要添加`-Dfile.encoding=UTF-8`参数，防止出现乱码问题。
 4. 部署前端网站。
 
 ### 使用

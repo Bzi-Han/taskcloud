@@ -91,5 +91,5 @@ create table if not exists `task_log`
     `from_where` varchar(32) not null comment '任务执行的来源'
 );
 
--- username:admin@x.x password:123123
-insert into `user` (`nickname`,`username`,`password`,`type`,`registed_time`,`state`) values ('nullptr','admin@x.x','1d190c36f4680c865c2ec525b16a2327cc98d365cc698a717d5e612f8b6c46cf7696d83e1c9cde3bcccaaf80c6fb6ec0836c0d81039bc2f9dd89b7ba5bb74a30',2,now(),3);
+-- username:admin@test.com password:123654
+insert into `user` (`nickname`,`username`,`password`,`type`,`registed_time`,`state`) values ('nullptr','admin@test.com','14821351d882bca263d6f36910bc70c5987a9ce561899e4453470be9f84804fe8bccbc70b92c0c3283af8f48357be7ca1beaed4707dda5ed7c63ac6839479fb4',2,now(),3);
