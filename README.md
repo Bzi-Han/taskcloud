@@ -8,7 +8,14 @@
 
 若是任务的开发者还可以在帮助中心发布帮助文档，以更好地帮助用户使用。
 
-相关文章：[Taskcloud基本重构完成与后续填坑记录计划贴](https://bzi-han.github.io/2022/07/02/%E9%A1%B9%E7%9B%AE-Taskcloud%E5%9F%BA%E6%9C%AC%E9%87%8D%E6%9E%84%E5%AE%8C%E6%88%90%E4%B8%8E%E5%90%8E%E7%BB%AD%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95%E8%AE%A1%E5%88%92%E8%B4%B4/)
+如果你是管理员则可以批量导入任务脚本，例如从指定的仓库拉取，或者可以上传`zip`文件进行导入。仓库文件夹需要遵守以下格式才能进行导入。
+
++ 根目录或任意子目录必须包含一个`tasks.json`文件来指定仓库的各种脚本信息。
++ `tasks.json`的[详细格式介绍](https://github.com/Bzi-Han/taskcloud/blob/main/docs/TasksJsonFormat.md)。
+
+我的脚本仓库: [scripts](https://github.com/Bzi-Han/scripts)
+
+项目相关文章：[Taskcloud基本重构完成与后续填坑记录计划贴](https://bzi-han.github.io/2022/07/02/%E9%A1%B9%E7%9B%AE-Taskcloud%E5%9F%BA%E6%9C%AC%E9%87%8D%E6%9E%84%E5%AE%8C%E6%88%90%E4%B8%8E%E5%90%8E%E7%BB%AD%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95%E8%AE%A1%E5%88%92%E8%B4%B4/)
 
 ### 架构
 
