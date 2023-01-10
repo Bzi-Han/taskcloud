@@ -580,6 +580,8 @@ HTTP GET请求。
 + `Javascript` 返回一个`object`
 
 对象中包含以下属性：
++ `success` 当前请求是否成功
++ `errorMessage` 如果当前请求失败，则会存在失败原因描述
 + `code` 请求结果状态码
 + `headers` 请求结果返回头
 + `content` 请求的结果
@@ -624,6 +626,8 @@ HTTP POST请求。
 + `Javascript` 返回一个`object`
 
 对象中包含以下属性：
++ `success` 当前请求是否成功
++ `errorMessage` 如果当前请求失败，则会存在失败原因描述
 + `code` 请求结果状态码
 + `headers` 请求结果返回头
 + `content` 请求的结果
@@ -670,6 +674,8 @@ HTTP PUT请求。
 + `Javascript` 返回一个`object`
 
 对象中包含以下属性：
++ `success` 当前请求是否成功
++ `errorMessage` 如果当前请求失败，则会存在失败原因描述
 + `code` 请求结果状态码
 + `headers` 请求结果返回头
 + `content` 请求的结果
@@ -713,6 +719,8 @@ HTTP DELETE请求。
 + `Javascript` 返回一个`object`
 
 对象中包含以下属性：
++ `success` 当前请求是否成功
++ `errorMessage` 如果当前请求失败，则会存在失败原因描述
 + `code` 请求结果状态码
 + `headers` 请求结果返回头
 + `content` 请求的结果
