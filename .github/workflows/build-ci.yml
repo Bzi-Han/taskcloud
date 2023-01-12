@@ -1,0 +1,56 @@
+name: build
+
+on:
+  workflow_dispatch:
+    inputs:
+      version-string:
+        description: "The version string of the program:"
+        required: true
+        type: string
+
+jobs:
+  # init:
+
+
+  # build-web:
+
+  # build-backend:
+
+  build-core:
+    build-windows:
+      runs-on: windows-latest
+
+      steps:
+        - uses: actions/checkout@v3
+          with:
+            submodules: recursive
+
+        - uses: ilammy/msvc-dev-cmd@v1
+
+        - name: Build program
+          run: |
+            cmake -S taskcloud_core -B taskcloud_core/build
+            cmake --build taskcloud_core/build --config Release
+
+        - uses: actions/upload-artifact@v3
+          with:
+            name: v${{ inputs.version-string }}-Release
+            path: taskcloud_core/build/core/windows/
+
+    build-linux:
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v3
+          with:
+            submodules: recursive
+
+        - name: Build program
+          run: |
+            cmake -S taskcloud_core -B taskcloud_core/build
+            cmake --build taskcloud_core/build --config Release
+
+        - uses: actions/upload-artifact@v3
+          with:
+            name: v${{ inputs.version-string }}-Release
+            path: taskcloud_core/build/core/linux/
