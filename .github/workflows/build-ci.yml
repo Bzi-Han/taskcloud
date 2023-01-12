@@ -13,14 +13,6 @@ on:
       - add-ci
 
 jobs:
-  # init:
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #       with:
-  #         submodules: recursive
-
   build-frontend:
     runs-on: ubuntu-latest
 
@@ -36,13 +28,13 @@ jobs:
       - name: Build
         run: |
           cd taskcloud_web
-          npm install
+          npm install --legacy-peer-deps
           npm run build
 
       - name: Copy
         run: |
           mkdir build
-          cp -r dist build/frontend
+          cp -r taskcloud_web/dist build/frontend
 
       - uses: actions/upload-artifact@v3
         with:
@@ -72,10 +64,7 @@ jobs:
         run: |
           mkdir build
           mkdir build/backend
-          pwd
-          ls
-          ls target
-          cp target/*.jar build/backend
+          cp taskcloud_backend/target/*.jar build/backend
 
       - uses: actions/upload-artifact@v3
         with:
