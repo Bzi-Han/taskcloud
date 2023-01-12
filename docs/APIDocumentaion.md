@@ -72,6 +72,10 @@ utf-8转gbk。
 
 转码后的数据。
 
+#### 注意
+
+此函数在`python`中不被支持。
+
 ---
 
 ### urlEncode
@@ -511,6 +515,7 @@ json数据加载器。
 | Name | Description |
 | - | - |
 | [json.loads](#loads) | 加载json文本数据为对象 |
+| [json.dumps](#dumps) | 转储对象为json文本数据 |
 
 ---
 
@@ -531,6 +536,26 @@ json数据加载器。
 + `Lua` 返回一个`table`
 + `Python` 返回一个`dict`
 + `Javascript` 返回一个`object`
+
+---
+
+### dumps
+
+转储对象为json文本数据。
+
+`string dumps(object data)`
+
+#### 参数
+
+*data*
+需要转储的数据
+
+#### 注意
+
+*data* 的值必须是一个对象，根据使用的语言不同而不同：
++ `Lua` 的值为`table`
++ `Python` 的值为`dict`或`list`
++ `Javascript` 的值为`object`
 
 ---
 
