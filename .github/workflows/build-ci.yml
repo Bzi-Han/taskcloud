@@ -13,40 +13,7 @@ on:
       - add-ci
 
 jobs:
-  # init:
-
-  # build-web:
-
-  # build-backend:
-
-  build-core-windows:
-    runs-on: windows-latest
-
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: recursive
-
-      - uses: ilammy/msvc-dev-cmd@v1
-
-      - name: Build program
-        run: |
-          cmake -S taskcloud_core -B taskcloud_core/build
-          cmake --build taskcloud_core/build --config Release
-
-      - name: Copy program
-        run: |
-          mkdir build
-          mkdir build/windows
-          cp taskcloud_core/build/Release/core.exe build/windows
-          cp taskcloud_core/build/Release/local.exe build/windows
-
-      - uses: actions/upload-artifact@v3
-        with:
-          name: v${{ inputs.version-string }}-Release
-          path: build/
-
-  build-core-linux:
+  init:
     runs-on: ubuntu-latest
 
     steps:
@@ -54,19 +21,108 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Build program
-        run: |
-          cmake -S taskcloud_core -B taskcloud_core/build
-          cmake --build taskcloud_core/build --config Release
+  build-web:
+    needs: init
 
-      - name: Copy program
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Build
+        run: |
+          cd taskcloud_web
+          npm ci
+          npm run build
+
+      - name: Copy
         run: |
           mkdir build
-          mkdir build/linux
-          cp taskcloud_core/build/core build/linux
-          cp taskcloud_core/build/local build/linux
+          cp -r dist build/frontend
 
       - uses: actions/upload-artifact@v3
         with:
           name: v${{ inputs.version-string }}-Release
           path: build/
+
+  build-backend:
+    needs: init
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 17
+          cache: 'maven'
+
+      - name: Build
+        run: |
+          cd taskcloud_backend
+          mvn package -D maven.test.skip=true
+
+      - name: Copy
+        run: |
+          mkdir build
+          mkdir build/backend
+          cp target/*.jar build/backend
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: v${{ inputs.version-string }}-Release
+          path: build/
+
+  # build-core-windows:
+  #   runs-on: windows-latest
+
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         submodules: recursive
+
+  #     - uses: ilammy/msvc-dev-cmd@v1
+
+  #     - name: Build program
+  #       run: |
+  #         cmake -S taskcloud_core -B taskcloud_core/build
+  #         cmake --build taskcloud_core/build --config Release
+
+  #     - name: Copy program
+  #       run: |
+  #         mkdir build
+  #         mkdir build/windows
+  #         cp taskcloud_core/build/Release/core.exe build/windows
+  #         cp taskcloud_core/build/Release/local.exe build/windows
+
+  #     - uses: actions/upload-artifact@v3
+  #       with:
+  #         name: v${{ inputs.version-string }}-Release
+  #         path: build/
+
+  # build-core-linux:
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         submodules: recursive
+
+  #     - name: Build program
+  #       run: |
+  #         cmake -S taskcloud_core -B taskcloud_core/build
+  #         cmake --build taskcloud_core/build --config Release
+
+  #     - name: Copy program
+  #       run: |
+  #         mkdir build
+  #         mkdir build/linux
+  #         cp taskcloud_core/build/core build/linux
+  #         cp taskcloud_core/build/local build/linux
+
+  #     - uses: actions/upload-artifact@v3
+  #       with:
+  #         name: v${{ inputs.version-string }}-Release
+  #         path: build/
