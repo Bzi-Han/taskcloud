@@ -1,0 +1,120 @@
+name: build
+
+on:
+  workflow_dispatch:
+    inputs:
+      version-string:
+        description: "The version string of the program:"
+        required: true
+        type: string
+
+jobs:
+  build-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Build
+        run: |
+          cd taskcloud_web
+          npm install --legacy-peer-deps
+          npm run build
+
+      - name: Copy
+        run: |
+          mkdir build
+          cp -r taskcloud_web/dist build/frontend
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: v${{ inputs.version-string }}-Release
+          path: build/
+
+  build-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 17
+          cache: 'maven'
+
+      - name: Build
+        run: |
+          cd taskcloud_backend
+          mvn package -D maven.test.skip=true
+
+      - name: Copy
+        run: |
+          mkdir build
+          mkdir build/backend
+          cp taskcloud_backend/target/*.jar build/backend
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: v${{ inputs.version-string }}-Release
+          path: build/
+
+  build-core-windows:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Build program
+        run: |
+          cmake -S taskcloud_core -B taskcloud_core/build
+          cmake --build taskcloud_core/build --config Release
+
+      - name: Copy program
+        run: |
+          mkdir build
+          mkdir build/windows
+          cp taskcloud_core/build/Release/core.exe build/windows
+          cp taskcloud_core/build/Release/local.exe build/windows
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: v${{ inputs.version-string }}-Release
+          path: build/
+
+  build-core-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Build program
+        run: |
+          cmake -S taskcloud_core -B taskcloud_core/build
+          cmake --build taskcloud_core/build --config Release
+
+      - name: Copy program
+        run: |
+          mkdir build
+          mkdir build/linux
+          cp taskcloud_core/build/core build/linux
+          cp taskcloud_core/build/local build/linux
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: v${{ inputs.version-string }}-Release
+          path: build/
