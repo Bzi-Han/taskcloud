@@ -13,20 +13,22 @@ on:
       - add-ci
 
 jobs:
-  init:
+  # init:
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         submodules: recursive
+
+  build-frontend:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
-
-  build-web:
-    needs: init
-
-    runs-on: ubuntu-latest
-
-    steps:
+          
       - uses: actions/setup-node@v3
         with:
           node-version: 16
@@ -48,11 +50,13 @@ jobs:
           path: build/
 
   build-backend:
-    needs: init
-
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
