@@ -34,10 +34,17 @@ jobs:
           cmake -S taskcloud_core -B taskcloud_core/build
           cmake --build taskcloud_core/build --config Release
 
+      - name: Copy program
+        run: |
+          mkdir build
+          mkdir build/windows
+          cp taskcloud_core/build/Release/core.exe build/windows
+          cp taskcloud_core/build/Release/local.exe build/windows
+
       - uses: actions/upload-artifact@v3
         with:
           name: v${{ inputs.version-string }}-Release
-          path: taskcloud_core/build/core/windows/
+          path: build/
 
   build-core-linux:
     runs-on: ubuntu-latest
@@ -52,7 +59,14 @@ jobs:
           cmake -S taskcloud_core -B taskcloud_core/build
           cmake --build taskcloud_core/build --config Release
 
+      - name: Copy program
+        run: |
+          mkdir build
+          mkdir build/linux
+          cp taskcloud_core/build/core build/linux
+          cp taskcloud_core/build/local build/linux
+
       - uses: actions/upload-artifact@v3
         with:
           name: v${{ inputs.version-string }}-Release
-          path: taskcloud_core/build/core/linux/
+          path: build/
