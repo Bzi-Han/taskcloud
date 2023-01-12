@@ -8,10 +8,6 @@ on:
         required: true
         type: string
 
-  push:
-    branches:
-      - add-ci
-
 jobs:
   build-frontend:
     runs-on: ubuntu-latest
@@ -71,54 +67,54 @@ jobs:
           name: v${{ inputs.version-string }}-Release
           path: build/
 
-  # build-core-windows:
-  #   runs-on: windows-latest
+  build-core-windows:
+    runs-on: windows-latest
 
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #       with:
-  #         submodules: recursive
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
 
-  #     - uses: ilammy/msvc-dev-cmd@v1
+      - uses: ilammy/msvc-dev-cmd@v1
 
-  #     - name: Build program
-  #       run: |
-  #         cmake -S taskcloud_core -B taskcloud_core/build
-  #         cmake --build taskcloud_core/build --config Release
+      - name: Build program
+        run: |
+          cmake -S taskcloud_core -B taskcloud_core/build
+          cmake --build taskcloud_core/build --config Release
 
-  #     - name: Copy program
-  #       run: |
-  #         mkdir build
-  #         mkdir build/windows
-  #         cp taskcloud_core/build/Release/core.exe build/windows
-  #         cp taskcloud_core/build/Release/local.exe build/windows
+      - name: Copy program
+        run: |
+          mkdir build
+          mkdir build/windows
+          cp taskcloud_core/build/Release/core.exe build/windows
+          cp taskcloud_core/build/Release/local.exe build/windows
 
-  #     - uses: actions/upload-artifact@v3
-  #       with:
-  #         name: v${{ inputs.version-string }}-Release
-  #         path: build/
+      - uses: actions/upload-artifact@v3
+        with:
+          name: v${{ inputs.version-string }}-Release
+          path: build/
 
-  # build-core-linux:
-  #   runs-on: ubuntu-latest
+  build-core-linux:
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #       with:
-  #         submodules: recursive
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
 
-  #     - name: Build program
-  #       run: |
-  #         cmake -S taskcloud_core -B taskcloud_core/build
-  #         cmake --build taskcloud_core/build --config Release
+      - name: Build program
+        run: |
+          cmake -S taskcloud_core -B taskcloud_core/build
+          cmake --build taskcloud_core/build --config Release
 
-  #     - name: Copy program
-  #       run: |
-  #         mkdir build
-  #         mkdir build/linux
-  #         cp taskcloud_core/build/core build/linux
-  #         cp taskcloud_core/build/local build/linux
+      - name: Copy program
+        run: |
+          mkdir build
+          mkdir build/linux
+          cp taskcloud_core/build/core build/linux
+          cp taskcloud_core/build/local build/linux
 
-  #     - uses: actions/upload-artifact@v3
-  #       with:
-  #         name: v${{ inputs.version-string }}-Release
-  #         path: build/
+      - uses: actions/upload-artifact@v3
+        with:
+          name: v${{ inputs.version-string }}-Release
+          path: build/
