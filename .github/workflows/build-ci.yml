@@ -36,7 +36,7 @@ jobs:
       - name: Build
         run: |
           cd taskcloud_web
-          npm ci
+          npm install
           npm run build
 
       - name: Copy
@@ -56,7 +56,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
-          
+
       - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
@@ -72,6 +72,9 @@ jobs:
         run: |
           mkdir build
           mkdir build/backend
+          pwd
+          ls
+          ls target
           cp target/*.jar build/backend
 
       - uses: actions/upload-artifact@v3
