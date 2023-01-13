@@ -118,3 +118,25 @@ jobs:
         with:
           name: v${{ inputs.version-string }}-Release
           path: build/
+
+  configuration-docker-compose-files:
+    needs: [build-frontend, build-backend, build-core-windows, build-core-linux]
+
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Make directories and copying files
+        run: |
+          mkdir build
+          mkdir build/sql
+          mkdir build/linux
+          cp datas/docker-compose.yml build
+          cp datas/taskcloud.sql build/sql
+          cp datas/init.sh build/linux
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: v${{ inputs.version-string }}-Release
+          path: build/

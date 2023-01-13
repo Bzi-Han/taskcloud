@@ -1,0 +1,53 @@
+version: "3.9"
+
+networks:
+  service:
+
+services:
+  mysql:
+    image: mysql:5.7.18
+    container_name: taskcloud_mysql
+    environment:
+      MYSQL_PORT: 3888
+      MYSQL_ROOT_PASSWORD: cvY:mAUbv8KLk.X
+      TZ: Asia/Shanghai
+    ports:
+      - 3888:3888
+    networks:
+      - service
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d:ro
+
+  core:
+    image: ubuntu:22.04
+    container_name: taskcloud_core
+    networks:
+      - service
+    volumes:
+      - ./linux/init.sh:/service/init.sh:ro
+      - ./linux/core:/service/core:ro
+    command: ["/bin/bash", "-c", "./service/init.sh && ./service/core"]
+
+  backend:
+    image: openjdk:17
+    container_name: taskcloud_backend
+    depends_on:
+      - mysql
+      - core
+    ports:
+      - 8080:8080
+    networks:
+      - service
+    volumes:
+      - ./backend/taskcloud-0.0.1-SNAPSHOT.jar:/service/taskcloud.jar:ro
+    command: ["java", "-jar", "/service/taskcloud.jar"]
+
+  frontend:
+    image: nginx
+    container_name: taskcloud_frontend
+    depends_on:
+      - backend
+    ports:
+      - 80:80
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
