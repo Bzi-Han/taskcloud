@@ -124,7 +124,8 @@ jobs:
           path: build/
 
   configuration-docker-compose-files:
-    needs: [build-frontend, build-backend, build-core-windows, build-core-linux]
+    # needs: [build-frontend, build-backend, build-core-windows, build-core-linux]
+    needs: [build-frontend, build-backend, build-core-linux]
 
     runs-on: ubuntu-22.04
 
