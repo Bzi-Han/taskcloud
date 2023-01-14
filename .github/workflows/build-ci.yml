@@ -9,10 +9,12 @@ on:
         type: string
       database:
         description: "Target database to use"
+        required: true
         default: 'taskcloud_mysql:3306'
         type: string
       engine:
         description: "Target core to use"
+        required: true
         default: 'taskcloud_core'
         type: string
 
