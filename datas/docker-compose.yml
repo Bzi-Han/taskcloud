@@ -8,11 +8,10 @@ services:
     image: mysql:5.7.18
     container_name: taskcloud_mysql
     environment:
-      MYSQL_PORT: 3888
       MYSQL_ROOT_PASSWORD: cvY:mAUbv8KLk.X
       TZ: Asia/Shanghai
     ports:
-      - 3888:3888
+      - 3888:3306
     networks:
       - service
     volumes:

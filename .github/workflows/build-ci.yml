@@ -7,6 +7,15 @@ on:
         description: "The version string of the program:"
         required: true
         type: string
+      database:
+        description: "Target database to use"
+        default: 'taskcloud_mysql:3306'
+        type: string
+      engine:
+        description: "Target core to use"
+        default: 'taskcloud_core'
+        type: string
+
 
 jobs:
   build-frontend:
@@ -54,6 +63,8 @@ jobs:
       - name: Build
         run: |
           cd taskcloud_backend
+          sed -i 's/127.0.0.1:3888/${{ inputs.database }}/g' src/main/resources/application.yml
+          sed -i 's/127.0.0.1/${{ inputs.engine }}/g' src/main/resources/application.yml
           mvn package -D maven.test.skip=true
 
       - name: Copy
@@ -79,6 +90,7 @@ jobs:
 
       - name: Build program
         run: |
+          (Get-Content -path taskcloud_core/src/common/global.cc -Raw) -replace '127.0.0.1','0.0.0.0' | Set-Content -Path taskcloud_core/src/common/global.cc
           cmake -S taskcloud_core -B taskcloud_core/build
           cmake --build taskcloud_core/build --config Release
 
@@ -104,6 +116,7 @@ jobs:
 
       - name: Build program
         run: |
+          sed -i 's/127.0.0.1/0.0.0.0/g' taskcloud_core/src/common/global.cc
           cmake -S taskcloud_core -B taskcloud_core/build
           cmake --build taskcloud_core/build --config Release
 
