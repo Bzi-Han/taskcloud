@@ -46,7 +46,7 @@ jobs:
       - name: Upload artifact for frontend
         uses: actions/upload-artifact@v4
         with:
-          name: v${{ inputs.version-string }}-Release
+          name: v${{ inputs.version-string }}-frontend-Release
           path: build/
 
   build-backend:
@@ -79,7 +79,7 @@ jobs:
       - name: Upload artifact for backend
         uses: actions/upload-artifact@v4
         with:
-          name: v${{ inputs.version-string }}-Release
+          name: v${{ inputs.version-string }}-backend-Release
           path: build/
 
   build-core-windows:
@@ -108,7 +108,7 @@ jobs:
       - name: Upload artifact for core-windows
         uses: actions/upload-artifact@v4
         with:
-          name: v${{ inputs.version-string }}-Release
+          name: v${{ inputs.version-string }}-core-windows-Release
           path: build/
 
   build-core-linux:
@@ -135,12 +135,10 @@ jobs:
       - name: Upload artifact for core-linux
         uses: actions/upload-artifact@v4
         with:
-          name: v${{ inputs.version-string }}-Release
+          name: v${{ inputs.version-string }}-core-linux-Release
           path: build/
 
   configuration-docker-compose-files:
-    needs: [build-frontend, build-backend, build-core-windows, build-core-linux]
-
     runs-on: ubuntu-22.04
 
     steps:
@@ -155,8 +153,19 @@ jobs:
           cp datas/taskcloud.sql build/sql
           cp datas/init.sh build/linux
 
-      - name: Upload artifact for docker-compose files
+      - name: Upload artifact for data files
         uses: actions/upload-artifact@v4
         with:
-          name: v${{ inputs.version-string }}-Release
+          name: v${{ inputs.version-string }}-datas-Release
           path: build/
+
+  merge:
+    needs: [build-frontend, build-backend, build-core-windows, build-core-linux, configuration-docker-compose-files]
+
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Merge artifacts
+        uses: actions/upload-artifact/merge@v4
+        with:
+          name: v${{ inputs.version-string }}-Release
