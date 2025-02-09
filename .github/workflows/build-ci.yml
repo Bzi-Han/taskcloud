@@ -43,7 +43,7 @@ jobs:
           mkdir build
           cp -r taskcloud_web/dist build/frontend
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: v${{ inputs.version-string }}-Release
           path: build/
@@ -75,7 +75,7 @@ jobs:
           mkdir build/backend
           cp taskcloud_backend/target/*.jar build/backend
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: v${{ inputs.version-string }}-Release
           path: build/
@@ -103,7 +103,7 @@ jobs:
           cp taskcloud_core/build/Release/core.exe build/windows
           cp taskcloud_core/build/Release/local.exe build/windows
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: v${{ inputs.version-string }}-Release
           path: build/
@@ -129,7 +129,7 @@ jobs:
           cp taskcloud_core/build/core build/linux
           cp taskcloud_core/build/local build/linux
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: v${{ inputs.version-string }}-Release
           path: build/
@@ -151,7 +151,7 @@ jobs:
           cp datas/taskcloud.sql build/sql
           cp datas/init.sh build/linux
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: v${{ inputs.version-string }}-Release
           path: build/
